@@ -262,10 +262,9 @@
             confetti({ startVelocity: 30, spread: 360, ticks: 60, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ffd1dc', '#ffffff', '#873e51', '#d3a4b4'] });
           }, 250);
 
-          // 1. Desktop Notification (No email header!)
-          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv", {
+          // 1. Desktop Notification (CORS bypass: No headers, Title passed in URL)
+          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🤍 Romantic Date Confirmed!"), {
             method: "POST",
-            headers: { "Title": "🤍 Romantic Date Confirmed!" },
             body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nNotes: ${notes}`
           }).catch(() => {});
 
