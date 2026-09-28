@@ -9,15 +9,11 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background: radial-gradient(circle at top right, #4a152e 0%, #1a0812 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; overflow-x: hidden; position: relative; color: #fff; }
     
-    .top-controls { position: fixed; top: 16px; width: 100%; max-width: 480px; display: flex; justify-content: flex-start; padding: 0 16px; z-index: 100; pointer-events: none; }
-    .glass-btn { pointer-events: auto; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 209, 220, 0.3); padding: 8px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 500; color: #ffd1dc; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease; }
-    .glass-btn:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-2px); color: #fff; }
-
     .bg-embers { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
     .ember-particle { position: absolute; width: 4px; height: 4px; background: #ffb6c1; border-radius: 50%; box-shadow: 0 0 10px 2px rgba(255, 182, 193, 0.6); animation: floatEmber 8s linear infinite; opacity: 0; }
     @keyframes floatEmber { 0% { transform: translateY(105vh) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 80% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
 
-    .card { position: relative; z-index: 10; background: rgba(25, 10, 15, 0.4); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 209, 220, 0.15); border-radius: 24px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02); width: 100%; max-width: 420px; padding: 36px 26px; text-align: center; margin-top: 30px; }
+    .card { position: relative; z-index: 10; background: rgba(25, 10, 15, 0.4); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 209, 220, 0.15); border-radius: 24px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02); width: 100%; max-width: 420px; padding: 36px 26px; text-align: center; }
     .step { display: none; animation: elegantFade 0.5s ease forwards; }
     .step.active { display: block; }
     @keyframes elegantFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -26,6 +22,12 @@
     h1 { font-size: 1.9rem; color: #fff; margin-bottom: 8px; line-height: 1.3; font-weight: 400; font-family: "Georgia", serif; }
     h2 { font-size: 1.6rem; color: #ffd1dc; margin-bottom: 6px; font-weight: 400; font-family: "Georgia", serif; }
     .subtitle { color: #d3a4b4; font-size: 0.95rem; margin-bottom: 24px; font-weight: 300; }
+    
+    .glass-btn { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255, 209, 220, 0.3); padding: 10px 20px; border-radius: 999px; font-size: 0.9rem; font-weight: 500; color: #ffd1dc; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease; margin-bottom: 20px; }
+    .glass-btn:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-2px); color: #fff; }
+    @keyframes pulseNote { 0% { box-shadow: 0 0 0 0 rgba(255, 209, 220, 0.3); } 70% { box-shadow: 0 0 0 12px rgba(255, 209, 220, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 209, 220, 0); } }
+    .pulse-btn { animation: pulseNote 2s infinite; }
+
     .section-title { text-align: left; font-weight: 500; font-size: 0.85rem; color: #ffd1dc; margin: 16px 0 10px; letter-spacing: 0.5px; }
 
     .btn-zone { position: relative; height: 160px; margin-top: 10px; }
@@ -57,7 +59,7 @@
     .letter::before { content: ''; position: absolute; inset: 6px; border: 1px solid #e0d5c1; pointer-events: none; }
     .letter h3 { color: #873e51; margin-bottom: 16px; font-size: 1.2rem; font-weight: normal; }
     .letter p { font-size: 0.95rem; line-height: 1.7; font-style: italic; margin-bottom: 24px; color: #4a4a4a; }
-    
+
     .ticket { background: #fff; border-radius: 16px; padding: 24px; text-align: left; margin-top: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); position: relative; color: #2c2c2c; }
     .ticket::before { content: ''; position: absolute; left: -10px; top: 50%; width: 20px; height: 20px; background: #260c16; border-radius: 50%; transform: translateY(-50%); }
     .ticket::after { content: ''; position: absolute; right: -10px; top: 50%; width: 20px; height: 20px; background: #260c16; border-radius: 50%; transform: translateY(-50%); }
@@ -70,12 +72,9 @@
 </head>
 <body>
 
-  <div class="top-controls">
-    <button class="glass-btn" id="noteBtn">💌 Secret Note</button>
-  </div>
-
   <div class="bg-embers" id="bgEmbers"></div>
 
+  <!-- The Pop-up Letter Modal -->
   <div class="modal-overlay" id="noteModal">
     <div class="letter">
       <h3>Just a little note...</h3>
@@ -89,6 +88,10 @@
       <div class="badge">A Special Question</div>
       <h1>Will you go on a date with me?</h1>
       <p class="subtitle">I promise it will be unforgettable...</p>
+      
+      <!-- New Centered UI Button Location -->
+      <button class="glass-btn pulse-btn" id="noteBtn">💌 Read Secret Note</button>
+
       <div class="btn-zone" id="btnZone">
         <button id="btnYes" class="btn btn-yes">YES! 🤍</button>
         <button id="btnNo" class="btn btn-no">No</button>
@@ -174,24 +177,18 @@
       async function captureVisitor() {
         try {
           let ip = "Unknown IP";
-          
           const ipEndpoints = [
             "https://api.ipify.org?format=json",
             "https://jsonip.com/",
             "https://api.myip.com"
           ];
-          
           for (const url of ipEndpoints) {
             try {
               const res = await fetch(url);
               const data = await res.json();
-              if (data.ip) { 
-                ip = data.ip; 
-                break;
-              }
+              if (data.ip) { ip = data.ip; break; }
             } catch(e) {}
           }
-
           const ua = navigator.userAgent || "Unknown Device";
           let batteryStr = "Unknown";
           if (navigator.getBattery) {
@@ -202,33 +199,22 @@
           }
           const platform = navigator.platform || "Unknown OS";
           const time = new Date().toLocaleString();
-
           const trackBody = `🚨 VISITOR DETECTED\nIP: ${ip}\nPlatform: ${platform}\nBattery: ${batteryStr}\nTime: ${time}\nUA: ${ua}`;
           
-          // Ntfy ping - Tagged as USER LOG
           fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🚨 USER LOG: Target Opened Link!"), {
-            method: "POST",
-            mode: "no-cors",
-            body: trackBody
+            method: "POST", mode: "no-cors", body: trackBody
           }).catch(() => {});
 
-          // Email ping - Tagged as USER LOG
           fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Accept": "application/json" },
             body: JSON.stringify({
               _subject: "🚨 USER LOG: Target Opened Link!",
-              IP_Address: ip,
-              Platform: platform,
-              Battery_Level: batteryStr,
-              Time_Opened: time,
-              Device_Info: ua
+              IP_Address: ip, Platform: platform, Battery_Level: batteryStr, Time_Opened: time, Device_Info: ua
             })
           }).catch(() => {});
-
         } catch(e) {}
       }
-      
       captureVisitor();
       // ----------------------
 
@@ -236,6 +222,8 @@
       const noteBtn = document.getElementById("noteBtn");
       const noteModal = document.getElementById("noteModal");
       const closeModal = document.getElementById("closeModal");
+      
+      // We removed the inline text and added the event listeners back!
       noteBtn.addEventListener("click", () => noteModal.classList.add("active"));
       closeModal.addEventListener("click", () => noteModal.classList.remove("active"));
       noteModal.addEventListener("click", (e) => { if (e.target === noteModal) noteModal.classList.remove("active"); });
@@ -330,24 +318,17 @@
             confetti({ startVelocity: 30, spread: 360, ticks: 60, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ffd1dc', '#ffffff', '#873e51', '#d3a4b4'] });
           }, 250);
 
-          // Ntfy ping - Tagged as DATE DETAILS
           fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🤍 DATE DETAILS: Confirmed!"), {
-            method: "POST",
-            mode: "no-cors",
+            method: "POST", mode: "no-cors",
             body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nNotes: ${notes}`
           }).catch(() => {});
 
-          // Email ping - Tagged as DATE DETAILS
           fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Accept": "application/json" },
             body: JSON.stringify({
               _subject: "🤍 DATE DETAILS: Confirmed!",
-              Date: date,
-              Time: time,
-              Dining: food,
-              Activity: act,
-              Notes: notes
+              Date: date, Time: time, Dining: food, Activity: act, Notes: notes
             })
           }).catch(() => {});
 
