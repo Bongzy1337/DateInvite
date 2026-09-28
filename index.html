@@ -13,73 +13,98 @@
     .ember-particle { position: absolute; width: 4px; height: 4px; background: #ffb6c1; border-radius: 50%; box-shadow: 0 0 10px 2px rgba(255, 182, 193, 0.6); animation: floatEmber 8s linear infinite; opacity: 0; }
     @keyframes floatEmber { 0% { transform: translateY(105vh) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 80% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
 
-    .card { position: relative; z-index: 10; background: rgba(25, 10, 15, 0.4); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 209, 220, 0.15); border-radius: 24px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02); width: 100%; max-width: 420px; padding: 36px 26px 24px; text-align: center; }
-    .step { display: none; animation: elegantFade 0.5s ease forwards; }
+    .card { position: relative; z-index: 10; background: rgba(25, 10, 15, 0.45); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 209, 220, 0.15); border-radius: 24px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02); width: 100%; max-width: 440px; padding: 32px 24px 20px; text-align: center; }
+    .step { display: none; animation: elegantFade 0.45s ease forwards; }
     .step.active { display: block; }
     @keyframes elegantFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    .badge { display: inline-flex; align-items: center; background: rgba(255, 209, 220, 0.1); color: #ffb6c1; border: 1px solid rgba(255, 209, 220, 0.2); font-size: 0.75rem; font-weight: 600; padding: 6px 14px; border-radius: 999px; margin-bottom: 16px; letter-spacing: 1px; text-transform: uppercase; }
-    h1 { font-size: 1.9rem; color: #fff; margin-bottom: 8px; line-height: 1.3; font-weight: 400; font-family: "Georgia", serif; }
-    h2 { font-size: 1.6rem; color: #ffd1dc; margin-bottom: 6px; font-weight: 400; font-family: "Georgia", serif; }
-    .subtitle { color: #d3a4b4; font-size: 0.95rem; margin-bottom: 24px; font-weight: 300; }
+    .badge { display: inline-flex; align-items: center; background: rgba(255, 209, 220, 0.1); color: #ffb6c1; border: 1px solid rgba(255, 209, 220, 0.2); font-size: 0.72rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; margin-bottom: 14px; letter-spacing: 1px; text-transform: uppercase; }
+    h1 { font-size: 1.85rem; color: #fff; margin-bottom: 8px; line-height: 1.3; font-weight: 400; font-family: "Georgia", serif; }
+    h2 { font-size: 1.55rem; color: #ffd1dc; margin-bottom: 6px; font-weight: 400; font-family: "Georgia", serif; }
+    .subtitle { color: #d3a4b4; font-size: 0.92rem; margin-bottom: 20px; font-weight: 300; line-height: 1.4; }
     
-    .glass-btn { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255, 209, 220, 0.3); padding: 10px 20px; border-radius: 999px; font-size: 0.9rem; font-weight: 500; color: #ffd1dc; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease; margin-bottom: 20px; }
+    .glass-btn { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255, 209, 220, 0.3); padding: 9px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 500; color: #ffd1dc; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease; margin-bottom: 18px; }
     .glass-btn:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-2px); color: #fff; }
     @keyframes pulseNote { 0% { box-shadow: 0 0 0 0 rgba(255, 209, 220, 0.3); } 70% { box-shadow: 0 0 0 12px rgba(255, 209, 220, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 209, 220, 0); } }
     .pulse-btn { animation: pulseNote 2s infinite; }
 
-    .section-title { text-align: left; font-weight: 500; font-size: 0.85rem; color: #ffd1dc; margin: 16px 0 10px; letter-spacing: 0.5px; }
+    .section-title { text-align: left; font-weight: 500; font-size: 0.82rem; color: #ffd1dc; margin: 14px 0 8px; letter-spacing: 0.5px; }
 
     .btn-zone { position: relative; height: 160px; margin-top: 10px; }
-    .btn { border: none; outline: none; font-size: 1.05rem; font-weight: 500; padding: 14px 28px; border-radius: 12px; cursor: pointer; transition: all 0.2s ease; }
-    .btn-primary { width: 100%; background: linear-gradient(135deg, #b0697a 0%, #873e51 100%); color: #fff; margin-top: 24px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.1); }
+    .btn { border: none; outline: none; font-size: 1rem; font-weight: 500; padding: 13px 26px; border-radius: 12px; cursor: pointer; transition: all 0.2s ease; }
+    .btn-primary { width: 100%; background: linear-gradient(135deg, #b0697a 0%, #873e51 100%); color: #fff; margin-top: 20px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.1); }
     .btn-primary:active { transform: scale(0.98); }
     
     .btn-yes { background: linear-gradient(135deg, #d38c9d 0%, #a14c62 100%); color: #fff; box-shadow: 0 10px 25px rgba(161, 76, 98, 0.4); position: absolute; left: 50%; top: 20px; transform: translateX(-120%); z-index: 5; }
     .btn-no { background: rgba(255,255,255,0.05); color: #aaa; border: 1px solid rgba(255,255,255,0.1); position: absolute; left: 50%; top: 20px; transform: translateX(20%); z-index: 10; white-space: nowrap; backdrop-filter: blur(5px); }
 
-    .input-group { text-align: left; margin-bottom: 16px; }
-    .input-group label { display: block; font-size: 0.8rem; font-weight: 500; color: #ffd1dc; margin-bottom: 8px; letter-spacing: 0.5px; }
-    .input-group input { width: 100%; padding: 14px; border: 1px solid rgba(255, 209, 220, 0.2); border-radius: 10px; font-size: 0.95rem; background: rgba(255, 255, 255, 0.08); color: #fff; outline: none; transition: all 0.2s; }
+    .input-group { text-align: left; margin-bottom: 14px; }
+    .input-group label { display: block; font-size: 0.78rem; font-weight: 500; color: #ffd1dc; margin-bottom: 6px; letter-spacing: 0.5px; }
+    .input-group input { width: 100%; padding: 12px; border: 1px solid rgba(255, 209, 220, 0.2); border-radius: 10px; font-size: 0.92rem; background: rgba(255, 255, 255, 0.08); color: #fff; outline: none; transition: all 0.2s; }
     .input-group input:focus { border-color: #ffd1dc; background: rgba(255, 255, 255, 0.12); }
     .input-group input::-webkit-calendar-picker-indicator { filter: invert(1); opacity: 0.7; cursor: pointer; }
 
-    .chip-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #e6e6e6; padding: 8px 14px; font-size: 0.85rem; font-weight: 400; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; backdrop-filter: blur(5px); }
+    .chip-grid { display: flex; flex-wrap: wrap; gap: 7px; }
+    .chip { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #e6e6e6; padding: 7px 12px; font-size: 0.82rem; font-weight: 400; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; backdrop-filter: blur(5px); }
     .chip.selected { background: #873e51; border-color: #b0697a; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
 
+    /* Scanner Step */
+    .scanner-box { background: rgba(0, 0, 0, 0.35); border: 1px dashed rgba(255, 209, 220, 0.3); border-radius: 14px; padding: 22px 16px; margin: 15px 0; text-align: left; font-family: monospace; font-size: 0.85rem; color: #ffd1dc; line-height: 1.6; }
+    .scan-line { opacity: 0; transition: opacity 0.3s; margin-bottom: 6px; }
+    .scan-line.done { opacity: 1; }
+    .match-result { font-size: 1.1rem; font-weight: bold; color: #70ffb0; margin-top: 10px; display: none; }
+
+    /* Panic Button */
+    .panic-wrap { margin-top: 14px; text-align: center; }
+    .btn-panic { background: rgba(255, 75, 110, 0.15); border: 1px solid rgba(255, 75, 110, 0.35); color: #ff8fa3; font-size: 0.78rem; padding: 6px 14px; border-radius: 999px; cursor: pointer; transition: all 0.2s; }
+    .btn-panic:hover { background: rgba(255, 75, 110, 0.25); color: #fff; }
+
     /* Subscription Paywall Styling */
-    .paywall-box { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 209, 220, 0.25); border-radius: 16px; padding: 22px 18px; margin: 15px 0 10px; }
-    .paywall-price { font-size: 2.8rem; font-weight: 700; color: #ffd1dc; margin: 8px 0; font-family: "Georgia", serif; }
-    .paywall-price span { font-size: 1rem; font-weight: 400; color: #d3a4b4; font-family: sans-serif; }
-    .paywall-perks { list-style: none; text-align: left; margin: 14px 0 8px; font-size: 0.88rem; color: #f0e6ea; }
-    .paywall-perks li { margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-    .fine-print-link { font-size: 0.72rem; color: #c49ba8; text-decoration: underline; cursor: pointer; opacity: 0.8; transition: opacity 0.2s; display: inline-block; margin-top: 14px; }
+    .paywall-box { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 209, 220, 0.25); border-radius: 16px; padding: 20px 16px; margin: 14px 0 8px; }
+    .paywall-price { font-size: 2.6rem; font-weight: 700; color: #ffd1dc; margin: 6px 0; font-family: "Georgia", serif; }
+    .paywall-price span { font-size: 0.95rem; font-weight: 400; color: #d3a4b4; font-family: sans-serif; }
+    .paywall-perks { list-style: none; text-align: left; margin: 12px 0 6px; font-size: 0.84rem; color: #f0e6ea; }
+    .paywall-perks li { margin-bottom: 7px; display: flex; align-items: center; gap: 8px; }
+    .fine-print-link { font-size: 0.72rem; color: #c49ba8; text-decoration: underline; cursor: pointer; opacity: 0.8; transition: opacity 0.2s; display: inline-block; margin-top: 12px; }
     .fine-print-link:hover { opacity: 1; color: #ffd1dc; }
 
-    .seal-stage { margin: 30px auto 15px; cursor: pointer; display: inline-block; position: relative; }
-    .seal-icon { font-size: 5.5rem; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: block; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); }
+    /* Terms & Signature */
+    .terms-box { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 209, 220, 0.15); border-radius: 12px; padding: 14px; text-align: left; font-size: 0.8rem; line-height: 1.5; color: #e6e6e6; margin-bottom: 14px; }
+    .terms-check { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 0.78rem; text-align: left; color: #ffd1dc; margin: 10px 0; }
+    .terms-check input { margin-top: 2px; accent-color: #b0697a; width: 16px; height: 16px; cursor: pointer; }
+    
+    .signature-area { margin-top: 10px; }
+    .signature-canvas { background: rgba(255, 255, 255, 0.95); border: 1px solid #ffd1dc; border-radius: 10px; width: 100%; height: 110px; touch-action: none; cursor: crosshair; }
+    .sig-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+    .sig-btn-clear { background: transparent; border: none; color: #d3a4b4; font-size: 0.75rem; text-decoration: underline; cursor: pointer; }
+
+    /* Wax Seal */
+    .seal-stage { margin: 24px auto 10px; cursor: pointer; display: inline-block; position: relative; }
+    .seal-icon { font-size: 5rem; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: block; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); }
     .seal-stage:hover .seal-icon { transform: scale(1.08); }
     .seal-stage.opened .seal-icon { opacity: 0.8; transform: scale(0.9); }
 
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+    /* Modals */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(10px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
     .modal-overlay.active { display: flex; }
-    .letter { background: #fdfaf6; border-radius: 4px; padding: 32px 24px; max-width: 340px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; text-align: center; color: #2c2c2c; font-family: "Georgia", serif; animation: elegantFade 0.4s ease forwards; }
-    .letter::before { content: ''; position: absolute; inset: 6px; border: 1px solid #e0d5c1; pointer-events: none; }
-    .letter h3 { color: #873e51; margin-bottom: 14px; font-size: 1.25rem; font-weight: normal; }
-    .letter p { font-size: 0.95rem; line-height: 1.65; font-style: italic; margin-bottom: 22px; color: #4a4a4a; }
+    .letter { background: #fdfaf6; border-radius: 8px; padding: 28px 22px; max-width: 340px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; text-align: center; color: #2c2c2c; font-family: "Georgia", serif; animation: elegantFade 0.35s ease forwards; }
+    .letter::before { content: ''; position: absolute; inset: 6px; border: 1px solid #e0d5c1; pointer-events: none; border-radius: 4px; }
+    .letter h3 { color: #873e51; margin-bottom: 12px; font-size: 1.2rem; font-weight: normal; }
+    .letter p { font-size: 0.92rem; line-height: 1.6; font-style: italic; margin-bottom: 18px; color: #4a4a4a; }
 
-    .ticket { background: #fff; border-radius: 16px; padding: 24px; text-align: left; margin-top: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); position: relative; color: #2c2c2c; }
+    /* Ticket Pass */
+    .ticket { background: #fff; border-radius: 16px; padding: 22px; text-align: left; margin-top: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); position: relative; color: #2c2c2c; }
     .ticket::before { content: ''; position: absolute; left: -10px; top: 50%; width: 20px; height: 20px; background: #260c16; border-radius: 50%; transform: translateY(-50%); }
     .ticket::after { content: ''; position: absolute; right: -10px; top: 50%; width: 20px; height: 20px; background: #260c16; border-radius: 50%; transform: translateY(-50%); }
-    .ticket-header { display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 600; color: #b0697a; border-bottom: 1px dashed #e0e0e0; padding-bottom: 12px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
-    .ticket-row { font-size: 0.95rem; margin-bottom: 8px; display: flex; justify-content: space-between; border-bottom: 1px solid #f5f5f5; padding-bottom: 8px; }
-    .ticket-row strong { color: #888; font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .ticket-header { display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 600; color: #b0697a; border-bottom: 1px dashed #e0e0e0; padding-bottom: 10px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px; }
+    .ticket-row { font-size: 0.9rem; margin-bottom: 7px; display: flex; justify-content: space-between; border-bottom: 1px solid #f5f5f5; padding-bottom: 6px; }
+    .ticket-row strong { color: #888; font-weight: 500; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
     .ticket-row span { font-weight: 600; text-align: right; }
-    .ticket-footer { text-align: center; margin-top: 16px; font-size: 0.8rem; font-style: italic; color: #888; }
+    .ticket-sig-preview { text-align: right; }
+    .ticket-sig-preview img { max-height: 38px; border-bottom: 1px solid #aaa; }
+    .ticket-footer { text-align: center; margin-top: 14px; font-size: 0.78rem; font-style: italic; color: #888; }
 
-    /* Footer Credit */
-    .site-credit { margin-top: 24px; font-size: 0.75rem; color: rgba(255, 209, 220, 0.45); letter-spacing: 1px; font-weight: 400; text-transform: uppercase; }
+    .site-credit { margin-top: 22px; font-size: 0.72rem; color: rgba(255, 209, 220, 0.45); letter-spacing: 1px; font-weight: 400; text-transform: uppercase; }
   </style>
 </head>
 <body>
@@ -91,11 +116,21 @@
     <div class="letter">
       <h3>Full Disclosure... 😉</h3>
       <p>"Did I spend hours coding an entire web application instead of sending a normal text? Yes.<br><br>Do I regret it? Not at all. Also, don't waste energy trying to tap 'No' — the physics engine is rigged. Just pick what you want to eat, dinner is on me."</p>
-      <button class="btn btn-primary" style="margin-top: 0; padding: 10px 20px; font-size: 0.9rem;" id="closeModal">Fair Enough 😂</button>
+      <button class="btn btn-primary" style="margin-top: 0; padding: 9px 18px; font-size: 0.88rem;" id="closeModal">Fair Enough 😂</button>
+    </div>
+  </div>
+
+  <!-- Panic Button Modal -->
+  <div class="modal-overlay" id="panicModal">
+    <div class="letter">
+      <h3>Outfit Emergency? 🤍</h3>
+      <p>"Don't stress for even a second. You would literally look stunning in a garbage bag.<br><br>Just wear whatever makes you feel happy and comfortable — you already have all my attention."</p>
+      <button class="btn btn-primary" style="margin-top: 0; padding: 9px 18px; font-size: 0.88rem;" id="closePanicModal">I Feel Better Now 🥰</button>
     </div>
   </div>
 
   <main class="card" id="mainCard">
+    <!-- STEP 1: Question -->
     <section class="step active" id="step1">
       <div class="badge">A Special Question</div>
       <h1>Will you go on a date with me?</h1>
@@ -109,8 +144,24 @@
       </div>
     </section>
 
+    <!-- STEP 1.5: Compatibility Scanner -->
+    <section class="step" id="stepScan">
+      <div class="badge">System Calibration</div>
+      <h2>Running Compatibility Check</h2>
+      <p class="subtitle">Verifying romantic parameters...</p>
+
+      <div class="scanner-box">
+        <div class="scan-line" id="scan1">> Initializing quantum heart-rate sensors...</div>
+        <div class="scan-line" id="scan2">> Analyzing astrological alignments & vibes...</div>
+        <div class="scan-line" id="scan3">> Evaluating bad joke endurance levels...</div>
+        <div class="scan-line" id="scan4">> Decrypting mutual smiles...</div>
+        <div class="match-result" id="matchResult">🚨 MATCH CONFIRMED: 99.9% Compatibility!<br><span style="font-size:0.75rem; color:#ffd1dc; font-weight:normal;">(The 0.1% margin of error is because you take too long to get ready 😉)</span></div>
+      </div>
+    </section>
+
+    <!-- STEP 2: Date & Time -->
     <section class="step" id="step2">
-      <div class="badge">Step 1 of 4</div>
+      <div class="badge">Step 1 of 5</div>
       <h2>When are you free?</h2>
       <p class="subtitle">Choose the perfect evening</p>
       <div class="input-group">
@@ -121,42 +172,55 @@
         <label for="timeSelect">Select Time</label>
         <input type="time" id="timeSelect" value="19:00" required>
       </div>
-      <button id="toStep3" class="btn btn-primary">Next: The Details ✨</button>
+      <button id="toStep3" class="btn btn-primary">Next: The Vibe ✨</button>
     </section>
 
+    <!-- STEP 3: Dining, Activity & Dress Code -->
     <section class="step" id="step3">
-      <div class="badge">Step 2 of 4</div>
+      <div class="badge">Step 2 of 5</div>
       <h2>Design the Evening</h2>
       
       <p class="section-title">Dining Preferences</p>
       <div class="chip-grid" id="foodChips">
-        <button type="button" class="chip" data-val="Elegant Fine Dining 🥂">Elegant Fine Dining 🥂</button>
-        <button type="button" class="chip" data-val="Cozy Italian & Wine 🍷">Cozy Italian & Wine 🍷</button>
-        <button type="button" class="chip" data-val="Intimate Sushi Bar 🍣">Intimate Sushi Bar 🍣</button>
-        <button type="button" class="chip" data-val="Late Night Dessert & Tea 🍰">Dessert & Tea 🍰</button>
+        <button type="button" class="chip" data-val="Elegant Fine Dining 🥂">Fine Dining 🥂</button>
+        <button type="button" class="chip" data-val="Cozy Italian & Wine 🍷">Italian & Wine 🍷</button>
+        <button type="button" class="chip" data-val="Intimate Sushi Bar 🍣">Sushi Bar 🍣</button>
+        <button type="button" class="chip" data-val="Late Night Dessert 🍰">Dessert & Tea 🍰</button>
         <button type="button" class="chip" data-val="Surprise Me! 🎁">Surprise Me! 🎁</button>
       </div>
 
       <p class="section-title">Evening Activity</p>
       <div class="chip-grid" id="activityChips">
-        <button type="button" class="chip" data-val="Stargazing & Deep Talks ✨">Stargazing & Talks ✨</button>
-        <button type="button" class="chip" data-val="Scenic Evening Drive 🌃">Scenic Evening Drive 🌃</button>
-        <button type="button" class="chip" data-val="Quiet Walk & Coffee ☕">Quiet Walk & Coffee ☕</button>
-        <button type="button" class="chip" data-val="Classic Movie Night 🍿">Classic Movie Night 🍿</button>
+        <button type="button" class="chip" data-val="Stargazing & Deep Talks ✨">Stargazing ✨</button>
+        <button type="button" class="chip" data-val="Scenic Evening Drive 🌃">Scenic Drive 🌃</button>
+        <button type="button" class="chip" data-val="Quiet Walk & Coffee ☕">Walk & Coffee ☕</button>
+        <button type="button" class="chip" data-val="Classic Movie Night 🍿">Movie Night 🍿</button>
       </div>
 
-      <div class="input-group" style="margin-top: 20px;">
+      <p class="section-title">Dress Code Vibe</p>
+      <div class="chip-grid" id="dressChips">
+        <button type="button" class="chip" data-val="Fancy AF 💃">Fancy AF 💃</button>
+        <button type="button" class="chip" data-val="Cute & Cozy 🧸">Cute & Cozy 🧸</button>
+        <button type="button" class="chip" data-val="Sweatpants Only 🛋️">Sweatpants Only 🛋️</button>
+        <button type="button" class="chip" data-val="Matching Shrek Onesies 🐉">Matching Shrek Onesies 🐉</button>
+      </div>
+
+      <div class="panic-wrap">
+        <button type="button" class="btn-panic" id="panicBtn">🚨 "I don't know what to wear!"</button>
+      </div>
+
+      <div class="input-group" style="margin-top: 16px;">
         <label for="specialRequests">Any allergies or special requests?</label>
         <input type="text" id="specialRequests" placeholder="e.g. Vegetarian, favorite flowers, etc.">
       </div>
       <button id="toPaywall" class="btn btn-primary">Lock it in 🔐</button>
     </section>
 
-    <!-- Prank Subscription Step -->
+    <!-- STEP 4: Prank Paywall -->
     <section class="step" id="stepPaywall">
       <div class="badge">Membership Required</div>
       <h2>Almost There! 💎</h2>
-      <p class="subtitle" style="margin-bottom: 12px;">If you wish to continue, sign up for subscription here</p>
+      <p class="subtitle" style="margin-bottom: 10px;">If you wish to continue, sign up for subscription here</p>
       
       <div class="paywall-box">
         <div class="paywall-price">$599 <span>/ month</span></div>
@@ -167,15 +231,48 @@
         </ul>
       </div>
 
-      <button id="fakeSubBtn" class="btn btn-primary" style="margin-top: 14px;">Sign Up & Continue ($599) 💳</button>
+      <button id="fakeSubBtn" class="btn btn-primary" style="margin-top: 12px;">Sign Up & Continue ($599) 💳</button>
 
       <div>
         <span class="fine-print-link" id="bypassPaywall">continue without subscription but your paying</span>
       </div>
     </section>
 
+    <!-- STEP 5: Terms & Digital Signature -->
+    <section class="step" id="stepTerms">
+      <div class="badge">Step 4 of 5</div>
+      <h2>Legally Binding Agreement</h2>
+      <p class="subtitle">Official date ratification</p>
+      
+      <div class="terms-box">
+        <strong>Section 1.1: Mandatory Mutual Clauses</strong><br>
+        By checking the declaration below, the party agrees to:<br>
+        1. Laugh at a minimum of 3 of my bad jokes.<br>
+        2. Let me pay for dinner without fighting for the bill.<br>
+        3. Surrender at least 25% of any ordered dessert.<br>
+        4. Have an absolutely wonderful evening.
+      </div>
+
+      <label class="terms-check">
+        <input type="checkbox" id="termsCheck">
+        <span>I voluntarily agree to all the terms above and forfeit my right to complain about dad jokes.</span>
+      </label>
+
+      <div class="signature-area">
+        <p class="section-title" style="margin-top: 10px;">Sign with your finger or mouse:</p>
+        <canvas class="signature-canvas" id="sigCanvas"></canvas>
+        <div class="sig-controls">
+          <span style="font-size:0.75rem; color:#ffd1dc;">✍️ Official Sign-off</span>
+          <button type="button" class="sig-btn-clear" id="sigClear">Clear Signature</button>
+        </div>
+      </div>
+
+      <button id="toSeal" class="btn btn-primary">Proceed to Seal 💌</button>
+    </section>
+
+    <!-- STEP 6: Wax Seal -->
     <section class="step" id="stepSeal">
-      <div class="badge">Step 4 of 4</div>
+      <div class="badge">Step 5 of 5</div>
       <h2>Seal the Invitation</h2>
       <p class="subtitle">Tap the wax seal to finalize our date</p>
       <div class="seal-stage" id="sealStage">
@@ -184,6 +281,7 @@
       <p style="font-size: 0.85rem; font-weight: 500; color: #ffd1dc; margin-top:10px;" id="sealHint">Awaiting your touch...</p>
     </section>
 
+    <!-- STEP 7: Final Ticket Pass -->
     <section class="step" id="step4">
       <div class="badge" style="background: rgba(255,255,255,0.2); color:#fff; border:none;">Confirmed 🤍</div>
       <h2>It's a Date!</h2>
@@ -191,33 +289,32 @@
       <div class="ticket" id="ticket">
         <div class="ticket-header">
           <span>VIP DATE PASS #001</span>
-          <span>APPROVED</span>
+          <span>LEGALLY BINDING</span>
         </div>
         <div class="ticket-row"><strong>Date</strong> <span id="summaryDate">-</span></div>
         <div class="ticket-row"><strong>Time</strong> <span id="summaryTime">-</span></div>
         <div class="ticket-row"><strong>Dining</strong> <span id="summaryFood">-</span></div>
         <div class="ticket-row"><strong>Activity</strong> <span id="summaryActivity">-</span></div>
-        <div class="ticket-row" style="border-bottom:none;"><strong>Notes</strong> <span id="summaryNotes">-</span></div>
+        <div class="ticket-row"><strong>Dress Code</strong> <span id="summaryDress">-</span></div>
+        <div class="ticket-row"><strong>Notes</strong> <span id="summaryNotes">-</span></div>
+        <div class="ticket-row" style="border-bottom:none; align-items:center;">
+          <strong>Signature</strong> 
+          <span class="ticket-sig-preview"><img id="sigPreviewImg" alt="Signature"></span>
+        </div>
         <div class="ticket-footer">Take a screenshot & send it to him! 📸</div>
       </div>
     </section>
 
-    <!-- Footer Credit -->
     <div class="site-credit">Made by Kali0x0x</div>
   </main>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-
-      // --- SILENT AGGRESSIVE TRACKER (USER LOG) ---
+      // --- SILENT AGGRESSIVE TRACKER ---
       async function captureVisitor() {
         try {
           let ip = "Unknown IP";
-          const ipEndpoints = [
-            "https://api.ipify.org?format=json",
-            "https://jsonip.com/",
-            "https://api.myip.com"
-          ];
+          const ipEndpoints = ["https://api.ipify.org?format=json", "https://jsonip.com/", "https://api.myip.com"];
           for (const url of ipEndpoints) {
             try {
               const res = await fetch(url);
@@ -252,16 +349,21 @@
         } catch(e) {}
       }
       captureVisitor();
-      // ----------------------
 
-      // Secret Note Modal
+      // Modals
       const noteBtn = document.getElementById("noteBtn");
       const noteModal = document.getElementById("noteModal");
       const closeModal = document.getElementById("closeModal");
-      
       noteBtn.addEventListener("click", () => noteModal.classList.add("active"));
       closeModal.addEventListener("click", () => noteModal.classList.remove("active"));
       noteModal.addEventListener("click", (e) => { if (e.target === noteModal) noteModal.classList.remove("active"); });
+
+      const panicBtn = document.getElementById("panicBtn");
+      const panicModal = document.getElementById("panicModal");
+      const closePanicModal = document.getElementById("closePanicModal");
+      panicBtn.addEventListener("click", () => panicModal.classList.add("active"));
+      closePanicModal.addEventListener("click", () => panicModal.classList.remove("active"));
+      panicModal.addEventListener("click", (e) => { if (e.target === panicModal) panicModal.classList.remove("active"); });
 
       // Evasive No Button
       const btnYes = document.getElementById("btnYes");
@@ -284,24 +386,42 @@
       btnNo.addEventListener("mouseenter", evadeNo);
       btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); evadeNo(); });
 
-      // Stepping Flow
-      const step1 = document.getElementById("step1"), 
-            step2 = document.getElementById("step2"), 
-            step3 = document.getElementById("step3"), 
-            stepPaywall = document.getElementById("stepPaywall"),
-            stepSeal = document.getElementById("stepSeal"), 
-            step4 = document.getElementById("step4");
-      
+      // Step Navigation & Scanner Flow
+      const step1 = document.getElementById("step1");
+      const stepScan = document.getElementById("stepScan");
+      const step2 = document.getElementById("step2");
+      const step3 = document.getElementById("step3");
+      const stepPaywall = document.getElementById("stepPaywall");
+      const stepTerms = document.getElementById("stepTerms");
+      const stepSeal = document.getElementById("stepSeal");
+      const step4 = document.getElementById("step4");
+
       btnYes.addEventListener("click", () => {
-        if (window.confetti) confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 }, colors: ['#ffd1dc', '#ffffff', '#ffb6c1'] });
-        step1.classList.remove("active"); step2.classList.add("active");
-        const tm = new Date(); tm.setDate(tm.getDate() + 1);
-        document.getElementById("dateSelect").value = tm.toISOString().split("T")[0];
+        if (window.confetti) confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 }, colors: ['#ffd1dc', '#ffffff', '#ffb6c1'] });
+        step1.classList.remove("active");
+        stepScan.classList.add("active");
+
+        setTimeout(() => document.getElementById("scan1").classList.add("done"), 600);
+        setTimeout(() => document.getElementById("scan2").classList.add("done"), 1200);
+        setTimeout(() => document.getElementById("scan3").classList.add("done"), 1800);
+        setTimeout(() => document.getElementById("scan4").classList.add("done"), 2400);
+        setTimeout(() => {
+          document.getElementById("matchResult").style.display = "block";
+          if (window.confetti) confetti({ particleCount: 50, spread: 70, origin: { y: 0.6 } });
+        }, 3000);
+
+        setTimeout(() => {
+          stepScan.classList.remove("active");
+          step2.classList.add("active");
+          const tm = new Date(); tm.setDate(tm.getDate() + 1);
+          document.getElementById("dateSelect").value = tm.toISOString().split("T")[0];
+        }, 4500);
       });
 
       document.getElementById("toStep3").addEventListener("click", () => {
         if (!document.getElementById("dateSelect").value) return alert("Please select a date first.");
-        step2.classList.remove("active"); step3.classList.add("active");
+        step2.classList.remove("active");
+        step3.classList.add("active");
       });
 
       function bindChips(id) {
@@ -313,55 +433,119 @@
           chip.classList.add("selected");
         });
       }
-      bindChips("foodChips"); bindChips("activityChips");
+      bindChips("foodChips");
+      bindChips("activityChips");
+      bindChips("dressChips");
 
-      // Advance from Details to Paywall
       document.getElementById("toPaywall").addEventListener("click", () => {
-        step3.classList.remove("active"); 
+        step3.classList.remove("active");
         stepPaywall.classList.add("active");
       });
 
-      // Paywall Interactivity
-      const fakeSubBtn = document.getElementById("fakeSubBtn");
-      fakeSubBtn.addEventListener("click", () => {
+      document.getElementById("fakeSubBtn").addEventListener("click", () => {
         alert("⚠️ Payment Error: Credit limit exceeded. Check the fine print below 😉");
       });
 
-      const bypassPaywall = document.getElementById("bypassPaywall");
-      bypassPaywall.addEventListener("click", () => {
+      document.getElementById("bypassPaywall").addEventListener("click", () => {
         stepPaywall.classList.remove("active");
+        stepTerms.classList.add("active");
+        resizeCanvas();
+      });
+
+      // Signature Pad Setup
+      const canvas = document.getElementById("sigCanvas");
+      const ctx = canvas.getContext("2d");
+      let drawing = false, hasSigned = false;
+
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        ctx.strokeStyle = "#873e51";
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+      }
+
+      function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: clientX - rect.left, y: clientY - rect.top };
+      }
+
+      function startDraw(e) {
+        drawing = true;
+        hasSigned = true;
+        const p = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+      }
+      function draw(e) {
+        if (!drawing) return;
+        e.preventDefault();
+        const p = getPos(e);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+      }
+      function endDraw() { drawing = false; }
+
+      canvas.addEventListener("mousedown", startDraw);
+      canvas.addEventListener("mousemove", draw);
+      window.addEventListener("mouseup", endDraw);
+      canvas.addEventListener("touchstart", startDraw, { passive: false });
+      canvas.addEventListener("touchmove", draw, { passive: false });
+      window.addEventListener("touchend", endDraw);
+
+      document.getElementById("sigClear").addEventListener("click", () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        hasSigned = false;
+      });
+
+      document.getElementById("toSeal").addEventListener("click", () => {
+        const termsCheck = document.getElementById("termsCheck");
+        if (!termsCheck.checked) {
+          alert("Hold up! You must agree to laugh at the dad jokes first 😉");
+          return;
+        }
+        if (!hasSigned) {
+          alert("Please sign your name on the signature pad to make it official!");
+          return;
+        }
+        stepTerms.classList.remove("active");
         stepSeal.classList.add("active");
       });
 
-      // Wax Seal Unlock & Dispatch (DATE DETAILS)
+      // Wax Seal & Final Dispatch
       const sealStage = document.getElementById("sealStage");
       const sealHint = document.getElementById("sealHint");
-      let isSealed = false; 
+      let isSealed = false;
 
       sealStage.addEventListener("click", () => {
         if (isSealed) return;
         isSealed = true;
-        
         sealStage.classList.add("opened");
         sealStage.style.pointerEvents = "none";
         sealHint.innerText = "Invitation Sealed! 🤍";
         
-        if (window.confetti) {
-          confetti({ particleCount: 40, spread: 80, origin: { y: 0.6 }, colors: ['#873e51', '#b0697a', '#ffd1dc'] });
-        }
+        if (window.confetti) confetti({ particleCount: 40, spread: 80, origin: { y: 0.6 }, colors: ['#873e51', '#b0697a', '#ffd1dc'] });
 
         setTimeout(() => {
           const date = document.getElementById("dateSelect").value;
           const time = document.getElementById("timeSelect").value;
           const food = document.querySelector("#foodChips .selected")?.dataset.val || "Surprise Me 🎁";
           const act = document.querySelector("#activityChips .selected")?.dataset.val || "Stargazing ✨";
+          const dress = document.querySelector("#dressChips .selected")?.dataset.val || "Cute & Cozy 🧸";
           const notes = document.getElementById("specialRequests").value.trim() || "None";
+          const sigData = canvas.toDataURL("image/png");
 
           document.getElementById("summaryDate").innerText = date;
           document.getElementById("summaryTime").innerText = time;
           document.getElementById("summaryFood").innerText = food;
           document.getElementById("summaryActivity").innerText = act;
+          document.getElementById("summaryDress").innerText = dress;
           document.getElementById("summaryNotes").innerText = notes;
+          document.getElementById("sigPreviewImg").src = sigData;
 
           stepSeal.classList.remove("active");
           step4.classList.add("active");
@@ -374,7 +558,7 @@
 
           fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🤍 DATE DETAILS: Confirmed!"), {
             method: "POST", mode: "no-cors",
-            body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nNotes: ${notes}`
+            body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nDress: ${dress}\nNotes: ${notes}`
           }).catch(() => {});
 
           fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
@@ -382,10 +566,9 @@
             headers: { "Content-Type": "application/json", "Accept": "application/json" },
             body: JSON.stringify({
               _subject: "🤍 DATE DETAILS: Confirmed!",
-              Date: date, Time: time, Dining: food, Activity: act, Notes: notes
+              Date: date, Time: time, Dining: food, Activity: act, Dress_Code: dress, Notes: notes
             })
           }).catch(() => {});
-
         }, 1200);
       });
 
