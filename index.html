@@ -262,24 +262,13 @@
             confetti({ startVelocity: 30, spread: 360, ticks: 60, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ffd1dc', '#ffffff', '#873e51', '#d3a4b4'] });
           }, 250);
 
-          // 1. Desktop Notification (CORS bypass: No headers, Title passed in URL)
-          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🤍 Romantic Date Confirmed!"), {
+          // 1. ntfy Desktop Notification AND Email Forwarding!
+          // We put the title and email directly in the URL to bypass the browser's CORS block
+          const ntfyUrl = "https://ntfy.sh/Q2FXLHSJuC9538sv?email=Kali0x0x@proton.me&title=" + encodeURIComponent("🤍 Romantic Date Confirmed!");
+          
+          fetch(ntfyUrl, {
             method: "POST",
             body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nNotes: ${notes}`
-          }).catch(() => {});
-
-          // 2. Email Delivery via FormSubmit
-          fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "Accept": "application/json" },
-            body: JSON.stringify({
-              _subject: "🤍 Date Invitation Confirmed!",
-              Date: date,
-              Time: time,
-              Dining: food,
-              Activity: act,
-              Notes: notes
-            })
           }).catch(() => {});
 
         }, 1200);
