@@ -228,18 +228,17 @@
         step3.classList.remove("active"); stepSeal.classList.add("active");
       });
 
-      // Wax Seal Unlock & Email Dispatch
+      // Wax Seal Unlock & Dispatch
       const sealStage = document.getElementById("sealStage");
       const sealHint = document.getElementById("sealHint");
       let isSealed = false; // Anti-spam lock
 
       sealStage.addEventListener("click", () => {
-        // Stop duplicate clicks immediately!
         if (isSealed) return;
         isSealed = true;
         
         sealStage.classList.add("opened");
-        sealStage.style.pointerEvents = "none"; // Make it physically unclickable
+        sealStage.style.pointerEvents = "none";
         sealHint.innerText = "Invitation Sealed! 🤍";
         
         if (window.confetti) {
@@ -268,9 +267,10 @@
             confetti({ startVelocity: 30, spread: 360, ticks: 60, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ffd1dc', '#ffffff', '#873e51', '#d3a4b4'] });
           }, 250);
 
-          // 1. Desktop Notification via ntfy (Strictly for the desktop popup)
-          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv?title=" + encodeURIComponent("🤍 Romantic Date Confirmed!"), {
+          // 1. ntfy bypass (mode: "no-cors" completely stops the browser from blocking it)
+          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv", {
             method: "POST",
+            mode: "no-cors",
             body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nNotes: ${notes}`
           }).catch(() => {});
 
