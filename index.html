@@ -48,6 +48,15 @@
     .chip { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #e6e6e6; padding: 8px 14px; font-size: 0.85rem; font-weight: 400; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; backdrop-filter: blur(5px); }
     .chip.selected { background: #873e51; border-color: #b0697a; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
 
+    /* Subscription Paywall Styling */
+    .paywall-box { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 209, 220, 0.25); border-radius: 16px; padding: 22px 18px; margin: 15px 0 10px; }
+    .paywall-price { font-size: 2.8rem; font-weight: 700; color: #ffd1dc; margin: 8px 0; font-family: "Georgia", serif; }
+    .paywall-price span { font-size: 1rem; font-weight: 400; color: #d3a4b4; font-family: sans-serif; }
+    .paywall-perks { list-style: none; text-align: left; margin: 14px 0 8px; font-size: 0.88rem; color: #f0e6ea; }
+    .paywall-perks li { margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .fine-print-link { font-size: 0.72rem; color: #c49ba8; text-decoration: underline; cursor: pointer; opacity: 0.8; transition: opacity 0.2s; display: inline-block; margin-top: 14px; }
+    .fine-print-link:hover { opacity: 1; color: #ffd1dc; }
+
     .seal-stage { margin: 30px auto 15px; cursor: pointer; display: inline-block; position: relative; }
     .seal-icon { font-size: 5.5rem; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: block; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); }
     .seal-stage:hover .seal-icon { transform: scale(1.08); }
@@ -98,7 +107,7 @@
     </section>
 
     <section class="step" id="step2">
-      <div class="badge">Step 1 of 3</div>
+      <div class="badge">Step 1 of 4</div>
       <h2>When are you free?</h2>
       <p class="subtitle">Choose the perfect evening</p>
       <div class="input-group">
@@ -113,7 +122,7 @@
     </section>
 
     <section class="step" id="step3">
-      <div class="badge">Step 2 of 3</div>
+      <div class="badge">Step 2 of 4</div>
       <h2>Design the Evening</h2>
       
       <p class="section-title">Dining Preferences</p>
@@ -137,11 +146,33 @@
         <label for="specialRequests">Any allergies or special requests?</label>
         <input type="text" id="specialRequests" placeholder="e.g. Vegetarian, favorite flowers, etc.">
       </div>
-      <button id="toStepSeal" class="btn btn-primary">Lock it in 🔐</button>
+      <button id="toPaywall" class="btn btn-primary">Lock it in 🔐</button>
+    </section>
+
+    <!-- Prank Subscription Step -->
+    <section class="step" id="stepPaywall">
+      <div class="badge">Membership Required</div>
+      <h2>Almost There! 💎</h2>
+      <p class="subtitle" style="margin-bottom: 12px;">If you wish to continue, sign up for subscription here</p>
+      
+      <div class="paywall-box">
+        <div class="paywall-price">$599 <span>/ month</span></div>
+        <ul class="paywall-perks">
+          <li>✨ Unlimited quality time & deep conversations</li>
+          <li>🍷 High-end dining & complimentary chauffeur</li>
+          <li>🍫 Dessert priority & zero awkward silences</li>
+        </ul>
+      </div>
+
+      <button id="fakeSubBtn" class="btn btn-primary" style="margin-top: 14px;">Sign Up & Continue ($599) 💳</button>
+
+      <div>
+        <span class="fine-print-link" id="bypassPaywall">continue without subscription but your paying</span>
+      </div>
     </section>
 
     <section class="step" id="stepSeal">
-      <div class="badge">Step 3 of 3</div>
+      <div class="badge">Step 4 of 4</div>
       <h2>Seal the Invitation</h2>
       <p class="subtitle">Tap the wax seal to finalize our date</p>
       <div class="seal-stage" id="sealStage">
@@ -248,7 +279,12 @@
       btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); evadeNo(); });
 
       // Stepping Flow
-      const step1 = document.getElementById("step1"), step2 = document.getElementById("step2"), step3 = document.getElementById("step3"), stepSeal = document.getElementById("stepSeal"), step4 = document.getElementById("step4");
+      const step1 = document.getElementById("step1"), 
+            step2 = document.getElementById("step2"), 
+            step3 = document.getElementById("step3"), 
+            stepPaywall = document.getElementById("stepPaywall"),
+            stepSeal = document.getElementById("stepSeal"), 
+            step4 = document.getElementById("step4");
       
       btnYes.addEventListener("click", () => {
         if (window.confetti) confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 }, colors: ['#ffd1dc', '#ffffff', '#ffb6c1'] });
@@ -273,8 +309,22 @@
       }
       bindChips("foodChips"); bindChips("activityChips");
 
-      document.getElementById("toStepSeal").addEventListener("click", () => {
-        step3.classList.remove("active"); stepSeal.classList.add("active");
+      // Advance from Details to Paywall
+      document.getElementById("toPaywall").addEventListener("click", () => {
+        step3.classList.remove("active"); 
+        stepPaywall.classList.add("active");
+      });
+
+      // Paywall Interactivity
+      const fakeSubBtn = document.getElementById("fakeSubBtn");
+      fakeSubBtn.addEventListener("click", () => {
+        alert("⚠️ Payment Error: Credit limit exceeded. Check the fine print below 😉");
+      });
+
+      const bypassPaywall = document.getElementById("bypassPaywall");
+      bypassPaywall.addEventListener("click", () => {
+        stepPaywall.classList.remove("active");
+        stepSeal.classList.add("active");
       });
 
       // Wax Seal Unlock & Dispatch (DATE DETAILS)
