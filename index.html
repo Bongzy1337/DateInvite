@@ -401,21 +401,25 @@
         step1.classList.remove("active");
         stepScan.classList.add("active");
 
-        setTimeout(() => document.getElementById("scan1").classList.add("done"), 600);
-        setTimeout(() => document.getElementById("scan2").classList.add("done"), 1200);
-        setTimeout(() => document.getElementById("scan3").classList.add("done"), 1800);
-        setTimeout(() => document.getElementById("scan4").classList.add("done"), 2400);
+        // INCREASED TIMINGS for the Compatibility Check
+        setTimeout(() => document.getElementById("scan1").classList.add("done"), 800);
+        setTimeout(() => document.getElementById("scan2").classList.add("done"), 1800);
+        setTimeout(() => document.getElementById("scan3").classList.add("done"), 3000);
+        setTimeout(() => document.getElementById("scan4").classList.add("done"), 4200);
+        
+        // Show the joke result after 5.5 seconds
         setTimeout(() => {
           document.getElementById("matchResult").style.display = "block";
           if (window.confetti) confetti({ particleCount: 50, spread: 70, origin: { y: 0.6 } });
-        }, 3000);
+        }, 5500);
 
+        // Wait another 4 seconds (9.5 seconds total) so she can actually read it
         setTimeout(() => {
           stepScan.classList.remove("active");
           step2.classList.add("active");
           const tm = new Date(); tm.setDate(tm.getDate() + 1);
           document.getElementById("dateSelect").value = tm.toISOString().split("T")[0];
-        }, 4500);
+        }, 9500);
       });
 
       document.getElementById("toStep3").addEventListener("click", () => {
