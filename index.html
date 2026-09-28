@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>A Special Invitation 🤍</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background: radial-gradient(circle at top right, #4a152e 0%, #1a0812 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; overflow-x: hidden; position: relative; color: #fff; }
+    
+    .top-controls { position: fixed; top: 16px; width: 100%; max-width: 480px; display: flex; justify-content: space-between; padding: 0 16px; z-index: 100; pointer-events: none; }
+    .glass-btn { pointer-events: auto; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 209, 220, 0.3); padding: 8px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 500; color: #ffd1dc; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease; }
+    .glass-btn:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-2px); color: #fff; }
+
+    .bg-embers { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+    .ember-particle { position: absolute; width: 4px; height: 4px; background: #ffb6c1; border-radius: 50%; box-shadow: 0 0 10px 2px rgba(255, 182, 193, 0.6); animation: floatEmber 8s linear infinite; opacity: 0; }
+    @keyframes floatEmber { 0% { transform: translateY(105vh) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 80% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
+
+    .card { position: relative; z-index: 10; background: rgba(25, 10, 15, 0.4); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 209, 220, 0.15); border-radius: 24px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02); width: 100%; max-width: 420px; padding: 36px 26px; text-align: center; margin-top: 30px; }
+    .step { display: none; animation: elegantFade 0.5s ease forwards; }
+    .step.active { display: block; }
+    @keyframes elegantFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+    .badge { display: inline-flex; align-items: center; background: rgba(255, 209, 220, 0.1); color: #ffb6c1; border: 1px solid rgba(255, 209, 220, 0.2); font-size: 0.75rem; font-weight: 600; padding: 6px 14px; border-radius: 999px; margin-bottom: 16px; letter-spacing: 1px; text-transform: uppercase; }
+    h1 { font-size: 1.9rem; color: #fff; margin-bottom: 8px; line-height: 1.3; font-weight: 400; font-family: "Georgia", serif; }
+    h2 { font-size: 1.6rem; color: #ffd1dc; margin-bottom: 6px; font-weight: 400; font-family: "Georgia", serif; }
+    .subtitle { color: #d3a4b4; font-size: 0.95rem; margin-bottom: 24px; font-weight: 300; }
+    .section-title { text-align: left; font-weight: 500; font-size: 0.85rem; color: #ffd1dc; margin: 16px 0 10px; letter-spacing: 0.5px; }
+
+    .btn-zone { position: relative; height: 160px; margin-top: 10px; }
+    .btn { border: none; outline: none; font-size: 1.05rem; font-weight: 500; padding: 14px 28px; border-radius: 12px; cursor: pointer; transition: all 0.2s ease; }
+    .btn-primary { width: 100%; background: linear-gradient(135deg, #b0697a 0%, #873e51 100%); color: #fff; margin-top: 24px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.1); }
+    .btn-primary:active { transform: scale(0.98); }
+    
+    .btn-yes { background: linear-gradient(135deg, #d38c9d 0%, #a14c62 100%); color: #fff; box-shadow: 0 10px 25px rgba(161, 76, 98, 0.4); position: absolute; left: 50%; top: 20px; transform: translateX(-120%); z-index: 5; }
+    .btn-no { background: rgba(255,255,255,0.05); color: #aaa; border: 1px solid rgba(255,255,255,0.1); position: absolute; left: 50%; top: 20px; transform: translateX(20%); z-index: 10; white-space: nowrap; backdrop-filter: blur(5px); }
+
+    .input-group { text-align: left; margin-bottom: 16px; }
+    .input-group label { display: block; font-size: 0.8rem; font-weight: 500; color: #ffd1dc; margin-bottom: 8px; letter-spacing: 0.5px; }
+    .input-group input { width: 100%; padding: 14px; border: 1px solid rgba(255, 209, 220, 0.2); border-radius: 10px; font-size: 0.95rem; background: rgba(255, 255, 255, 0.08); color: #fff; outline: none; transition: all 0.2s; }
+    .input-group input:focus { border-color: #ffd1dc; background: rgba(255, 255, 255, 0.12); }
+    .input-group input::-webkit-calendar-picker-indicator { filter: invert(1); opacity: 0.7; cursor: pointer; }
+
+    .chip-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #e6e6e6; padding: 8px 14px; font-size: 0.85rem; font-weight: 400; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; backdrop-filter: blur(5px); }
+    .chip.selected { background: #873e51; border-color: #b0697a; color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+
+    .seal-stage { margin: 30px auto 15px; cursor: pointer; display: inline-block; position: relative; }
+    .seal-icon { font-size: 5.5rem; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: block; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); }
+    .seal-stage:hover .seal-icon { transform: scale(1.08); }
+    .seal-stage.opened .seal-icon { opacity: 0.8; transform: scale(0.9); }
+
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.active { display: flex; }
+    .letter { background: #fdfaf6; border-radius: 4px; padding: 32px 24px; max-width: 340px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; text-align: center; color: #2c2c2c; font-family: "Georgia", serif; animation: elegantFade 0.4s ease forwards; }
+    .letter::before { content: ''; position: absolute; inset: 6px; border: 1px solid #e0d5c1; pointer-events: none; }
+    .letter h3 { color: #873e51; margin-bottom: 16px; font-size: 1.2rem; font-weight: normal; }
+    .letter p { font-size: 0.95rem; line-height: 1.7; font-style: italic; margin-bottom: 24px; color: #4a4a4a; }
+    
+    .ticket { background: #fff; border-radius: 16px; padding: 24px; text-align: left; margin-top: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); position: relative; color: #2c2c2c; }
+    .ticket::before { content: ''; position: absolute; left: -10px; top: 50%; width: 20px; height: 20px; background: #260c16; border-radius: 50%; transform: translateY(-50%); }
+    .ticket::after { content: ''; position: absolute; right: -10px; top: 50%; width: 20px; height: 20px; background: #260c16; border-radius: 50%; transform: translateY(-50%); }
+    .ticket-header { display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 600; color: #b0697a; border-bottom: 1px dashed #e0e0e0; padding-bottom: 12px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+    .ticket-row { font-size: 0.95rem; margin-bottom: 8px; display: flex; justify-content: space-between; border-bottom: 1px solid #f5f5f5; padding-bottom: 8px; }
+    .ticket-row strong { color: #888; font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .ticket-row span { font-weight: 600; text-align: right; }
+    .ticket-footer { text-align: center; margin-top: 16px; font-size: 0.8rem; font-style: italic; color: #888; }
+  </style>
+</head>
+<body>
+
+  <div class="top-controls">
+    <button class="glass-btn" id="noteBtn">💌 Secret Note</button>
+    <button class="glass-btn" id="audioToggle">🎵 Vibe: OFF</button>
+  </div>
+
+  <div class="bg-embers" id="bgEmbers"></div>
+
+  <div class="modal-overlay" id="noteModal">
+    <div class="letter">
+      <h3>Just a little note...</h3>
+      <p>"I could have just texted you, but I wanted to make this as special as you are. Take your time, pick what sounds perfect, and I'll take care of the rest."</p>
+      <button class="btn btn-primary" style="margin-top: 0; padding: 10px 20px; font-size: 0.9rem;" id="closeModal">Close Note</button>
+    </div>
+  </div>
+
+  <main class="card" id="mainCard">
+    <section class="step active" id="step1">
+      <div class="badge">A Special Question</div>
+      <h1>Will you go on a date with me?</h1>
+      <p class="subtitle">I promise it will be unforgettable...</p>
+      <div class="btn-zone" id="btnZone">
+        <button id="btnYes" class="btn btn-yes">YES! 🤍</button>
+        <button id="btnNo" class="btn btn-no">No</button>
+      </div>
+    </section>
+
+    <section class="step" id="step2">
+      <div class="badge">Step 1 of 3</div>
+      <h2>When are you free?</h2>
+      <p class="subtitle">Choose the perfect evening</p>
+      <div class="input-group">
+        <label for="dateSelect">Select Date</label>
+        <input type="date" id="dateSelect" required>
+      </div>
+      <div class="input-group">
+        <label for="timeSelect">Select Time</label>
+        <input type="time" id="timeSelect" value="19:00" required>
+      </div>
+      <button id="toStep3" class="btn btn-primary">Next: The Details ✨</button>
+    </section>
+
+    <section class="step" id="step3">
+      <div class="badge">Step 2 of 3</div>
+      <h2>Design the Evening</h2>
+      
+      <p class="section-title">Dining Preferences</p>
+      <div class="chip-grid" id="foodChips">
+        <button type="button" class="chip" data-val="Elegant Fine Dining 🥂">Elegant Fine Dining 🥂</button>
+        <button type="button" class="chip" data-val="Cozy Italian & Wine 🍷">Cozy Italian & Wine 🍷</button>
+        <button type="button" class="chip" data-val="Intimate Sushi Bar 🍣">Intimate Sushi Bar 🍣</button>
+        <button type="button" class="chip" data-val="Late Night Dessert & Tea 🍰">Dessert & Tea 🍰</button>
+        <button type="button" class="chip" data-val="Surprise Me! 🎁">Surprise Me! 🎁</button>
+      </div>
+
+      <p class="section-title">Evening Activity</p>
+      <div class="chip-grid" id="activityChips">
+        <button type="button" class="chip" data-val="Stargazing & Deep Talks ✨">Stargazing & Talks ✨</button>
+        <button type="button" class="chip" data-val="Scenic Evening Drive 🌃">Scenic Evening Drive 🌃</button>
+        <button type="button" class="chip" data-val="Quiet Walk & Coffee ☕">Quiet Walk & Coffee ☕</button>
+        <button type="button" class="chip" data-val="Classic Movie Night 🍿">Classic Movie Night 🍿</button>
+      </div>
+
+      <div class="input-group" style="margin-top: 20px;">
+        <label for="specialRequests">Any allergies or special requests?</label>
+        <input type="text" id="specialRequests" placeholder="e.g. Vegetarian, favorite flowers, etc.">
+      </div>
+      <button id="toStepSeal" class="btn btn-primary">Lock it in 🔐</button>
+    </section>
+
+    <section class="step" id="stepSeal">
+      <div class="badge">Step 3 of 3</div>
+      <h2>Seal the Invitation</h2>
+      <p class="subtitle">Tap the wax seal to finalize our date</p>
+      <div class="seal-stage" id="sealStage">
+        <span class="seal-icon" id="sealIcon">💌</span>
+      </div>
+      <p style="font-size: 0.85rem; font-weight: 500; color: #ffd1dc; margin-top:10px;" id="sealHint">Awaiting your touch...</p>
+    </section>
+
+    <section class="step" id="step4">
+      <div class="badge" style="background: rgba(255,255,255,0.2); color:#fff; border:none;">Confirmed 🤍</div>
+      <h2>It's a Date!</h2>
+      <p class="subtitle">I can't wait. Here is your official pass.</p>
+      <div class="ticket" id="ticket">
+        <div class="ticket-header">
+          <span>VIP DATE PASS #001</span>
+          <span>APPROVED</span>
+        </div>
+        <div class="ticket-row"><strong>Date</strong> <span id="summaryDate">-</span></div>
+        <div class="ticket-row"><strong>Time</strong> <span id="summaryTime">-</span></div>
+        <div class="ticket-row"><strong>Dining</strong> <span id="summaryFood">-</span></div>
+        <div class="ticket-row"><strong>Activity</strong> <span id="summaryActivity">-</span></div>
+        <div class="ticket-row" style="border-bottom:none;"><strong>Notes</strong> <span id="summaryNotes">-</span></div>
+        <div class="ticket-footer">Take a screenshot & send it to him! 📸</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Romantic Synthetic Audio (Warm Pad + Vinyl Crackle)
+      let audioCtx = null, padOsc = null, padOsc2 = null, noiseNode = null, masterGain = null;
+      let isPlaying = false;
+      const audioToggle = document.getElementById("audioToggle");
+
+      function toggleAudio() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          masterGain = audioCtx.createGain();
+          masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+          masterGain.connect(audioCtx.destination);
+
+          // Warm Pad (Sine/Triangle mix)
+          padOsc = audioCtx.createOscillator();
+          padOsc.type = 'triangle';
+          padOsc.frequency.setValueAtTime(196.00, audioCtx.currentTime); // G3
+          
+          padOsc2 = audioCtx.createOscillator();
+          padOsc2.type = 'sine';
+          padOsc2.frequency.setValueAtTime(246.94, audioCtx.currentTime); // B3 (Major 3rd)
+
+          const padFilter = audioCtx.createBiquadFilter();
+          padFilter.type = 'lowpass';
+          padFilter.frequency.setValueAtTime(400, audioCtx.currentTime);
+          
+          // Vinyl Crackle Noise
+          const bufferSize = audioCtx.sampleRate * 2;
+          const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+             // Sparse crackle
+             output[i] = Math.random() < 0.005 ? (Math.random() * 2 - 1) : 0;
+          }
+          noiseNode = audioCtx.createBufferSource();
+          noiseNode.buffer = noiseBuffer;
+          noiseNode.loop = true;
+          const noiseFilter = audioCtx.createBiquadFilter();
+          noiseFilter.type = 'highpass';
+          noiseFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
+          const noiseGain = audioCtx.createGain();
+          noiseGain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+
+          padOsc.connect(padFilter);
+          padOsc2.connect(padFilter);
+          padFilter.connect(masterGain);
+          
+          noiseNode.connect(noiseFilter);
+          noiseFilter.connect(noiseGain);
+          noiseGain.connect(masterGain);
+
+          padOsc.start();
+          padOsc2.start();
+          noiseNode.start();
+        }
+
+        if (isPlaying) {
+          masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.5);
+          audioToggle.innerText = "🎵 Vibe: OFF";
+          isPlaying = false;
+        } else {
+          audioCtx.resume();
+          masterGain.gain.setTargetAtTime(0.12, audioCtx.currentTime, 1.0); // Gentle fade in
+          audioToggle.innerText = "🎵 Vibe: ON";
+          isPlaying = true;
+        }
+      }
+      audioToggle.addEventListener("click", toggleAudio);
+
+      // 2. Secret Note Modal
+      const noteBtn = document.getElementById("noteBtn");
+      const noteModal = document.getElementById("noteModal");
+      const closeModal = document.getElementById("closeModal");
+      noteBtn.addEventListener("click", () => noteModal.classList.add("active"));
+      closeModal.addEventListener("click", () => noteModal.classList.remove("active"));
+      noteModal.addEventListener("click", (e) => { if (e.target === noteModal) noteModal.classList.remove("active"); });
+
+      // 3. Evasive No Button
+      const btnYes = document.getElementById("btnYes");
+      const btnNo = document.getElementById("btnNo");
+      const btnZone = document.getElementById("btnZone");
+      let noCount = 0, yesScale = 1;
+      const noPhrases = [ "No", "Are you sure?", "Think again...", "Nice try 😉", "Just click YES", "Too slow!", "I won't let you!" ];
+      
+      function evadeNo() {
+        noCount++;
+        btnNo.innerText = noPhrases[noCount % noPhrases.length];
+        yesScale += 0.15;
+        btnYes.style.transform = `translateX(-120%) scale(${yesScale})`;
+        const z = btnZone.getBoundingClientRect(), b = btnNo.getBoundingClientRect();
+        btnNo.style.position = "absolute";
+        btnNo.style.left = `${Math.max(0, Math.floor(Math.random() * (z.width - b.width)))}px`;
+        btnNo.style.top = `${Math.max(0, Math.floor(Math.random() * (z.height - b.height)))}px`;
+        btnNo.style.transform = "none";
+      }
+      btnNo.addEventListener("mouseenter", evadeNo);
+      btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); evadeNo(); });
+
+      // 4. Stepping Flow
+      const step1 = document.getElementById("step1"), step2 = document.getElementById("step2"), step3 = document.getElementById("step3"), stepSeal = document.getElementById("stepSeal"), step4 = document.getElementById("step4");
+      
+      btnYes.addEventListener("click", () => {
+        if (window.confetti) confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 }, colors: ['#ffd1dc', '#ffffff', '#ffb6c1'] });
+        step1.classList.remove("active"); step2.classList.add("active");
+        const tm = new Date(); tm.setDate(tm.getDate() + 1);
+        document.getElementById("dateSelect").value = tm.toISOString().split("T")[0];
+      });
+
+      document.getElementById("toStep3").addEventListener("click", () => {
+        if (!document.getElementById("dateSelect").value) return alert("Please select a date first.");
+        step2.classList.remove("active"); step3.classList.add("active");
+      });
+
+      function bindChips(id) {
+        const wrap = document.getElementById(id);
+        wrap.addEventListener("click", (e) => {
+          const chip = e.target.closest(".chip");
+          if (!chip) return;
+          wrap.querySelectorAll(".chip").forEach(c => c.classList.remove("selected"));
+          chip.classList.add("selected");
+        });
+      }
+      bindChips("foodChips"); bindChips("activityChips");
+
+      document.getElementById("toStepSeal").addEventListener("click", () => {
+        step3.classList.remove("active"); stepSeal.classList.add("active");
+      });
+
+      // 5. Wax Seal Unlock & Email Dispatch
+      const sealStage = document.getElementById("sealStage");
+      const sealHint = document.getElementById("sealHint");
+
+      sealStage.addEventListener("click", () => {
+        sealStage.classList.add("opened");
+        sealHint.innerText = "Invitation Sealed! 🤍";
+        
+        if (window.confetti) {
+          confetti({ particleCount: 40, spread: 80, origin: { y: 0.6 }, colors: ['#873e51', '#b0697a', '#ffd1dc'] });
+        }
+
+        setTimeout(() => {
+          const date = document.getElementById("dateSelect").value;
+          const time = document.getElementById("timeSelect").value;
+          const food = document.querySelector("#foodChips .selected")?.dataset.val || "Surprise Me 🎁";
+          const act = document.querySelector("#activityChips .selected")?.dataset.val || "Stargazing ✨";
+          const notes = document.getElementById("specialRequests").value.trim() || "None";
+
+          document.getElementById("summaryDate").innerText = date;
+          document.getElementById("summaryTime").innerText = time;
+          document.getElementById("summaryFood").innerText = food;
+          document.getElementById("summaryActivity").innerText = act;
+          document.getElementById("summaryNotes").innerText = notes;
+
+          stepSeal.classList.remove("active");
+          step4.classList.add("active");
+
+          const end = Date.now() + 2500;
+          const iv = setInterval(() => {
+            if (Date.now() > end) return clearInterval(iv);
+            confetti({ startVelocity: 30, spread: 360, ticks: 60, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ffd1dc', '#ffffff', '#873e51', '#d3a4b4'] });
+          }, 250);
+
+          // Submit to the private ntfy topic, setting Title and Email headers
+          fetch("https://ntfy.sh/Q2FXLHSJuC9538sv", {
+            method: "POST",
+            headers: {
+              "Title": "🤍 Romantic Date Confirmed!",
+              "Email": "Kali0x0x@proton.me"
+            },
+            body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nNotes: ${notes}`
+          }).catch(() => {});
+        }, 1200);
+      });
+
+      // 6. Floating Ambient Embers
+      const bg = document.getElementById("bgEmbers");
+      for (let i = 0; i < 25; i++) {
+        const p = document.createElement("div"); 
+        p.className = "ember-particle"; 
+        p.style.left = `${Math.random() * 100}vw`; 
+        p.style.animationDelay = `${Math.random() * 8}s`; 
+        p.style.animationDuration = `${7 + Math.random() * 6}s`;
+        // Random slight size variations
+        const size = 3 + Math.random() * 3;
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+        bg.appendChild(p);
+      }
+    });
+  </script>
+</body>
+</html>
