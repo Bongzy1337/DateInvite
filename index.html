@@ -9,7 +9,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background: radial-gradient(circle at top right, #4a152e 0%, #1a0812 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; overflow-x: hidden; position: relative; color: #fff; }
     
-    .top-controls { position: fixed; top: 16px; width: 100%; max-width: 480px; display: flex; justify-content: space-between; padding: 0 16px; z-index: 100; pointer-events: none; }
+    .top-controls { position: fixed; top: 16px; width: 100%; max-width: 480px; display: flex; justify-content: flex-start; padding: 0 16px; z-index: 100; pointer-events: none; }
     .glass-btn { pointer-events: auto; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 209, 220, 0.3); padding: 8px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 500; color: #ffd1dc; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease; }
     .glass-btn:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-2px); color: #fff; }
 
@@ -72,7 +72,6 @@
 
   <div class="top-controls">
     <button class="glass-btn" id="noteBtn">💌 Secret Note</button>
-    <button class="glass-btn" id="audioToggle">🎵 Vibe: OFF</button>
   </div>
 
   <div class="bg-embers" id="bgEmbers"></div>
@@ -170,70 +169,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      let audioCtx = null, padOsc = null, padOsc2 = null, noiseNode = null, masterGain = null;
-      let isPlaying = false;
-      const audioToggle = document.getElementById("audioToggle");
-
-      function toggleAudio() {
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          masterGain = audioCtx.createGain();
-          masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
-          masterGain.connect(audioCtx.destination);
-
-          padOsc = audioCtx.createOscillator();
-          padOsc.type = 'triangle';
-          padOsc.frequency.setValueAtTime(196.00, audioCtx.currentTime); 
-          
-          padOsc2 = audioCtx.createOscillator();
-          padOsc2.type = 'sine';
-          padOsc2.frequency.setValueAtTime(246.94, audioCtx.currentTime); 
-
-          const padFilter = audioCtx.createBiquadFilter();
-          padFilter.type = 'lowpass';
-          padFilter.frequency.setValueAtTime(400, audioCtx.currentTime);
-          
-          const bufferSize = audioCtx.sampleRate * 2;
-          const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-          const output = noiseBuffer.getChannelData(0);
-          for (let i = 0; i < bufferSize; i++) {
-             output[i] = Math.random() < 0.005 ? (Math.random() * 2 - 1) : 0;
-          }
-          noiseNode = audioCtx.createBufferSource();
-          noiseNode.buffer = noiseBuffer;
-          noiseNode.loop = true;
-          const noiseFilter = audioCtx.createBiquadFilter();
-          noiseFilter.type = 'highpass';
-          noiseFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
-          const noiseGain = audioCtx.createGain();
-          noiseGain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-
-          padOsc.connect(padFilter);
-          padOsc2.connect(padFilter);
-          padFilter.connect(masterGain);
-          
-          noiseNode.connect(noiseFilter);
-          noiseFilter.connect(noiseGain);
-          noiseGain.connect(masterGain);
-
-          padOsc.start();
-          padOsc2.start();
-          noiseNode.start();
-        }
-
-        if (isPlaying) {
-          masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.5);
-          audioToggle.innerText = "🎵 Vibe: OFF";
-          isPlaying = false;
-        } else {
-          audioCtx.resume();
-          masterGain.gain.setTargetAtTime(0.12, audioCtx.currentTime, 1.0); 
-          audioToggle.innerText = "🎵 Vibe: ON";
-          isPlaying = true;
-        }
-      }
-      audioToggle.addEventListener("click", toggleAudio);
-
+      // Secret Note Modal
       const noteBtn = document.getElementById("noteBtn");
       const noteModal = document.getElementById("noteModal");
       const closeModal = document.getElementById("closeModal");
@@ -241,6 +177,7 @@
       closeModal.addEventListener("click", () => noteModal.classList.remove("active"));
       noteModal.addEventListener("click", (e) => { if (e.target === noteModal) noteModal.classList.remove("active"); });
 
+      // Evasive No Button
       const btnYes = document.getElementById("btnYes");
       const btnNo = document.getElementById("btnNo");
       const btnZone = document.getElementById("btnZone");
@@ -261,6 +198,7 @@
       btnNo.addEventListener("mouseenter", evadeNo);
       btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); evadeNo(); });
 
+      // Stepping Flow
       const step1 = document.getElementById("step1"), step2 = document.getElementById("step2"), step3 = document.getElementById("step3"), stepSeal = document.getElementById("stepSeal"), step4 = document.getElementById("step4");
       
       btnYes.addEventListener("click", () => {
@@ -290,6 +228,7 @@
         step3.classList.remove("active"); stepSeal.classList.add("active");
       });
 
+      // Wax Seal Unlock & Email Dispatch
       const sealStage = document.getElementById("sealStage");
       const sealHint = document.getElementById("sealHint");
 
@@ -347,6 +286,7 @@
         }, 1200);
       });
 
+      // Floating Ambient Embers
       const bg = document.getElementById("bgEmbers");
       for (let i = 0; i < 25; i++) {
         const p = document.createElement("div"); 
