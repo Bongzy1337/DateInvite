@@ -170,7 +170,6 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Romantic Synthetic Audio (Warm Pad + Vinyl Crackle)
       let audioCtx = null, padOsc = null, padOsc2 = null, noiseNode = null, masterGain = null;
       let isPlaying = false;
       const audioToggle = document.getElementById("audioToggle");
@@ -182,25 +181,22 @@
           masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
           masterGain.connect(audioCtx.destination);
 
-          // Warm Pad (Sine/Triangle mix)
           padOsc = audioCtx.createOscillator();
           padOsc.type = 'triangle';
-          padOsc.frequency.setValueAtTime(196.00, audioCtx.currentTime); // G3
+          padOsc.frequency.setValueAtTime(196.00, audioCtx.currentTime); 
           
           padOsc2 = audioCtx.createOscillator();
           padOsc2.type = 'sine';
-          padOsc2.frequency.setValueAtTime(246.94, audioCtx.currentTime); // B3 (Major 3rd)
+          padOsc2.frequency.setValueAtTime(246.94, audioCtx.currentTime); 
 
           const padFilter = audioCtx.createBiquadFilter();
           padFilter.type = 'lowpass';
           padFilter.frequency.setValueAtTime(400, audioCtx.currentTime);
           
-          // Vinyl Crackle Noise
           const bufferSize = audioCtx.sampleRate * 2;
           const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
           const output = noiseBuffer.getChannelData(0);
           for (let i = 0; i < bufferSize; i++) {
-             // Sparse crackle
              output[i] = Math.random() < 0.005 ? (Math.random() * 2 - 1) : 0;
           }
           noiseNode = audioCtx.createBufferSource();
@@ -231,14 +227,13 @@
           isPlaying = false;
         } else {
           audioCtx.resume();
-          masterGain.gain.setTargetAtTime(0.12, audioCtx.currentTime, 1.0); // Gentle fade in
+          masterGain.gain.setTargetAtTime(0.12, audioCtx.currentTime, 1.0); 
           audioToggle.innerText = "🎵 Vibe: ON";
           isPlaying = true;
         }
       }
       audioToggle.addEventListener("click", toggleAudio);
 
-      // 2. Secret Note Modal
       const noteBtn = document.getElementById("noteBtn");
       const noteModal = document.getElementById("noteModal");
       const closeModal = document.getElementById("closeModal");
@@ -246,7 +241,6 @@
       closeModal.addEventListener("click", () => noteModal.classList.remove("active"));
       noteModal.addEventListener("click", (e) => { if (e.target === noteModal) noteModal.classList.remove("active"); });
 
-      // 3. Evasive No Button
       const btnYes = document.getElementById("btnYes");
       const btnNo = document.getElementById("btnNo");
       const btnZone = document.getElementById("btnZone");
@@ -267,7 +261,6 @@
       btnNo.addEventListener("mouseenter", evadeNo);
       btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); evadeNo(); });
 
-      // 4. Stepping Flow
       const step1 = document.getElementById("step1"), step2 = document.getElementById("step2"), step3 = document.getElementById("step3"), stepSeal = document.getElementById("stepSeal"), step4 = document.getElementById("step4");
       
       btnYes.addEventListener("click", () => {
@@ -297,7 +290,6 @@
         step3.classList.remove("active"); stepSeal.classList.add("active");
       });
 
-      // 5. Wax Seal Unlock & Email Dispatch
       const sealStage = document.getElementById("sealStage");
       const sealHint = document.getElementById("sealHint");
 
@@ -331,19 +323,30 @@
             confetti({ startVelocity: 30, spread: 360, ticks: 60, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ffd1dc', '#ffffff', '#873e51', '#d3a4b4'] });
           }, 250);
 
-          // Submit to the private ntfy topic, setting Title and Email headers
+          // 1. Desktop Notification (No email header!)
           fetch("https://ntfy.sh/Q2FXLHSJuC9538sv", {
             method: "POST",
-            headers: {
-              "Title": "🤍 Romantic Date Confirmed!",
-              "Email": "Kali0x0x@proton.me"
-            },
+            headers: { "Title": "🤍 Romantic Date Confirmed!" },
             body: `🤍 DATE ACCEPTED!\nDate: ${date}\nTime: ${time}\nDining: ${food}\nPlan: ${act}\nNotes: ${notes}`
           }).catch(() => {});
+
+          // 2. Email Delivery via FormSubmit
+          fetch("https://formsubmit.co/ajax/Kali0x0x@proton.me", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify({
+              _subject: "🤍 Date Invitation Confirmed!",
+              Date: date,
+              Time: time,
+              Dining: food,
+              Activity: act,
+              Notes: notes
+            })
+          }).catch(() => {});
+
         }, 1200);
       });
 
-      // 6. Floating Ambient Embers
       const bg = document.getElementById("bgEmbers");
       for (let i = 0; i < 25; i++) {
         const p = document.createElement("div"); 
@@ -351,7 +354,6 @@
         p.style.left = `${Math.random() * 100}vw`; 
         p.style.animationDelay = `${Math.random() * 8}s`; 
         p.style.animationDuration = `${7 + Math.random() * 6}s`;
-        // Random slight size variations
         const size = 3 + Math.random() * 3;
         p.style.width = `${size}px`;
         p.style.height = `${size}px`;
